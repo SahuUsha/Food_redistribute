@@ -172,6 +172,14 @@ exports.userRouter.post("/signin", (req, res) => __awaiter(void 0, void 0, void 
             });
             return;
         }
+        //if email exists but otp not verified then again send OTP to user then 
+        //verify otp 
+        if (CheckedByEmail && !CheckedByEmail.verified) {
+            res.json({
+                message: "Look_like_you_are_not_verfied"
+            });
+            return;
+        }
         const token = jsonwebtoken_1.default.sign({
             userId: CheckedByEmail.id
         }, JWT_KEY);
