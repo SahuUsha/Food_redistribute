@@ -2,6 +2,11 @@ import {Route, Routes } from "react-router-dom"
 import { SignIn } from "../screens/signin"
 import { SignUp } from "../screens/signup"
 import { Home } from "../screens/home"
+import { Create } from "../screens/create"
+import { About } from "../screens/about"
+import { VerifyAcc } from "../screens/verifyacc"
+import { VerifyOtp } from "../screens/verifyotp"
+import { Waiting } from "../screens/waiting"
 
 export const AppRoutes=()=>{
 
@@ -10,6 +15,11 @@ export const AppRoutes=()=>{
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/" element={<Home/>}/>
+        <Route path="/create" element={<Create/>}/>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/verifyacc" element={<VerifyAcc/>}/>
+        <Route path="/verifyotp" element={<VerifyOtp/>}/>
+        <Route path="/uploading" element={<Waiting/>}/>
       </Routes>
     </div>
 }
