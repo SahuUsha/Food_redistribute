@@ -1,8 +1,71 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from "axios";
+import { useRef, useState } from "react";
 
 export const SignUp=()=>{
 
     const navigate=useNavigate();
+ 
+    const email=useRef<HTMLInputElement>(null);
+    const password=useRef<HTMLInputElement>(null);
+    const confirmpassword=useRef<HTMLInputElement>(null);
+
+
+    const handleSignUp=useGoogleLogin({
+       onSuccess:(response)=>{
+       const accessToken=response.access_token;
+
+       axios.get("https://www.googleapis.com/oauth2/v3/userinfo",{
+        headers:{
+            Authorization: `Bearer ${accessToken}`,  
+        }
+     }).then((response:any)=>{
+       if(response){
+     axios.post("http://localhost:3000/user/signup",{
+            email:response.data.email,
+            name:response.data.name,
+            googleId:response.data.sub
+        },{withCredentials:true}).then((resp:any)=>{
+            console.log("from backend!!!",resp);
+            if(resp.data.data==="OTP_Send"){
+                console.log("email aa gaya!!",email);
+                navigate("/otp",{state:{email:resp.data.email}})
+            } else if(resp.data.message==="Email_exists"){
+                alert("Email Already Exists");
+                return;
+            }
+        })
+
+       }
+    })
+    }
+
+})
+
+const handleManualSignUp=async()=>{
+      if(confirmpassword.current?.value!=password.current?.value){
+        alert("Both password Not Matched");
+        return;
+      } else{
+       const resp=await axios.post("http://localhost:3000/user/signup",{
+            email:email.current?.value,
+            password:password.current?.value
+        },{withCredentials:true})
+     
+        console.log("custom backend",resp);
+        if(resp.data.data==="OTP_Send"){
+            console.log("email aa gaya!!",email);
+            navigate("/otp",{state:{email:resp.data.email}})
+        } else if(resp.data.message==="Email_exists"){
+            alert("Email Already Exists");
+            return;
+        }
+
+      }
+
+}
+
 
 return   <div className="h-screen flex flex-col justify-center bg-[#292A2D] text-white items-center w-full">
 
@@ -24,24 +87,24 @@ return   <div className="h-screen flex flex-col justify-center bg-[#292A2D] text
 
            <div className="w-72">
             <div className="w-full mb-6">
-                <input className=" border-1 border-gray-500 outline-none h-10 p-4 w-full rounded-xl" placeholder="Enter Your Email"/>
+                <input ref={email} className=" border-1 border-gray-500 outline-none h-10 p-4 w-full rounded-xl" placeholder="Enter Your Email"/>
             </div>
 
 
             <div className="w-full mb-6">
-                <input className="border-1 border-gray-500 outline-none h-10 w-full p-4 rounded-xl" placeholder="Enter Your Password"/>
+                <input ref={password} className="border-1 border-gray-500 outline-none h-10 w-full p-4 rounded-xl" placeholder="Enter Your Password"/>
             </div>
 
 
             <div className="w-full mb-6">
-                <input className="border-1 border-gray-500 outline-none h-10 w-full p-4 rounded-xl" placeholder="Confirm Your Password"/>
+                <input ref={confirmpassword} className="border-1 border-gray-500 outline-none h-10 w-full p-4 rounded-xl" placeholder="Confirm Your Password"/>
             </div>
 
 
             <div className="w-full flex flex-col items-center">
-               <button className=" mb-3 bg-[#3D4FA9] cursor-pointer h-10 w-full rounded">SignUp</button>
+               <button  onClick={handleManualSignUp}  className=" mb-3 bg-[#3D4FA9] cursor-pointer h-10 w-full rounded">SignUp</button>
 
-               <div className="mb-3 border-gray-500 border-1 text-red-400 cursor-pointer flex justify-center items-center h-10 w-full rounded">
+               <div onClick={()=>handleSignUp() } className="mb-3 border-gray-500 border-1 text-red-400 cursor-pointer flex justify-center items-center h-10 w-full rounded">
                 <img src="Google__G__logo.svg.png" className="h-8 cover" alt="" />
                 </div>  
              

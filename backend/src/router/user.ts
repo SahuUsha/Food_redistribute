@@ -14,22 +14,29 @@ import otpgenerator from 'otp-generator';
 
 userRouter.post("/signup",async(req,res)=>{
         console.log("reached!!")
-        console.log(JWT_KEY);
+        // console.log(JWT_KEY);
    try{
     const RequiredTypes=z.object({
-        name:z.string().min(3).max(100),
+        googleId:z.string().optional(),
+        name:z.string().min(3).max(100).optional(),
         email:z.string().min(5).max(100).email(),
+        password:z.string().min(5).max(50).optional()
     })
+    console.log("reached here");
     
     const CheckedRequiredTypes=RequiredTypes.safeParse(req.body);
+    console.log(CheckedRequiredTypes)
     
     if(!CheckedRequiredTypes.success){
         res.status(422).send("Invalid Input types");
         return;
     }
-     
     
-    const {name,email,googleId}=req.body;
+    console.log("reached here also");
+    
+    const {name,email,googleId,password}=req.body;
+    console.log(email);
+    console.log(password);
     
     const CheckedByEmail=await pclient.users.findUnique({
         where:{
@@ -49,9 +56,12 @@ userRouter.post("/signup",async(req,res)=>{
             googleId:googleId,
             name:name,
             email:email,
+            password:password,
             verified:false,
         }
      })
+
+    //  console.log("user toh bnan gaya!!",PutUserIntoDB);
 
      const CreateOTP=otpgenerator.generate(6,{
         digits:true,upperCaseAlphabets:false,specialChars:false,lowerCaseAlphabets:false
@@ -70,15 +80,25 @@ userRouter.post("/signup",async(req,res)=>{
      const token=jwt.sign({
         userId:PutUserIntoDB.id
     },JWT_KEY);
-    
-     res.cookie("userId",PutUserIntoDB.id,{httpOnly:false,secure:false});
+
+    // console.log("token is : ",token);
+
+     
+ 
+     res.cookie("userId",PutUserIntoDB.id,{httpOnly:true,secure:false});
 
     res.cookie("uidcookie",token,{
-        httpOnly:false,
+        httpOnly:true,
         secure:false
     })
 
-    res.status(200).send("OTP_Send");
+    // console.log(res.cookie);
+    // console.log(res);
+
+    res.json({
+        data:"OTP_Send",
+        email
+    })
    } catch(e){
        console.log(e)
     res.status(500).send("Something went Wrong!!!");
@@ -103,7 +123,7 @@ userRouter.post("/logout",(req,res)=>{
 
 userRouter.post("/verifyotp",async(req,res)=>{
     const token=req.cookies.uidcookie;
-    // console.log("here");
+    console.log("here");
 
 
 

@@ -7,6 +7,7 @@ import { About } from "../screens/about"
 import { VerifyAcc } from "../screens/verifyacc"
 import { VerifyOtp } from "../screens/verifyotp"
 import { Waiting } from "../screens/waiting"
+import { OTP } from "../screens/otp"
 
 export const AppRoutes=()=>{
 
@@ -20,6 +21,7 @@ export const AppRoutes=()=>{
         <Route path="/verifyacc" element={<VerifyAcc/>}/>
         <Route path="/verifyotp" element={<VerifyOtp/>}/>
         <Route path="/uploading" element={<Waiting/>}/>
+        <Route path="/otp" element={<OTP/>}/>
       </Routes>
     </div>
 }

@@ -27,18 +27,25 @@ const sendemail = require("../otplogic/otp");
 const otp_generator_1 = __importDefault(require("otp-generator"));
 exports.userRouter.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("reached!!");
-    console.log(JWT_KEY);
+    // console.log(JWT_KEY);
     try {
         const RequiredTypes = zod_1.default.object({
-            name: zod_1.default.string().min(3).max(100),
+            googleId: zod_1.default.string().optional(),
+            name: zod_1.default.string().min(3).max(100).optional(),
             email: zod_1.default.string().min(5).max(100).email(),
+            password: zod_1.default.string().min(5).max(50).optional()
         });
+        console.log("reached here");
         const CheckedRequiredTypes = RequiredTypes.safeParse(req.body);
+        console.log(CheckedRequiredTypes);
         if (!CheckedRequiredTypes.success) {
             res.status(422).send("Invalid Input types");
             return;
         }
-        const { name, email, googleId } = req.body;
+        console.log("reached here also");
+        const { name, email, googleId, password } = req.body;
+        console.log(email);
+        console.log(password);
         const CheckedByEmail = yield pclient.users.findUnique({
             where: {
                 email: email
@@ -55,9 +62,11 @@ exports.userRouter.post("/signup", (req, res) => __awaiter(void 0, void 0, void 
                 googleId: googleId,
                 name: name,
                 email: email,
+                password: password,
                 verified: false,
             }
         });
+        //  console.log("user toh bnan gaya!!",PutUserIntoDB);
         const CreateOTP = otp_generator_1.default.generate(6, {
             digits: true, upperCaseAlphabets: false, specialChars: false, lowerCaseAlphabets: false
         });
@@ -71,12 +80,18 @@ exports.userRouter.post("/signup", (req, res) => __awaiter(void 0, void 0, void 
         const token = jsonwebtoken_1.default.sign({
             userId: PutUserIntoDB.id
         }, JWT_KEY);
-        res.cookie("userId", PutUserIntoDB.id, { httpOnly: false, secure: false });
+        // console.log("token is : ",token);
+        res.cookie("userId", PutUserIntoDB.id, { httpOnly: true, secure: false });
         res.cookie("uidcookie", token, {
-            httpOnly: false,
+            httpOnly: true,
             secure: false
         });
-        res.status(200).send("OTP_Send");
+        // console.log(res.cookie);
+        // console.log(res);
+        res.json({
+            data: "OTP_Send",
+            email
+        });
     }
     catch (e) {
         console.log(e);
@@ -99,7 +114,7 @@ exports.userRouter.post("/logout", (req, res) => {
 });
 exports.userRouter.post("/verifyotp", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.cookies.uidcookie;
-    // console.log("here");
+    console.log("here");
     if (!token) {
         res.json({
             message: "Not_SignedIn"
