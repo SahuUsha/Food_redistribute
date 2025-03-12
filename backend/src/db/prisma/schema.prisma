@@ -21,3 +21,14 @@ model otpmodel{
   otp String @unique
   email String @unique
 }
+
+model placeInfo{
+ id String @id @unique @default(uuid())
+ email String
+ name String
+ phoneNo String
+ Description String
+ Price String
+ Lattitude String
+ Longitude String
+}
