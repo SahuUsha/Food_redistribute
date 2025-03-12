@@ -44,25 +44,31 @@ export const SignUp=()=>{
 })
 
 const handleManualSignUp=async()=>{
-      if(confirmpassword.current?.value!=password.current?.value){
-        alert("Both password Not Matched");
+    if(confirmpassword.current?.value==="" || password.current?.value==="" || email.current?.value===""){
+        alert("Enter Valid Details Only");
         return;
-      } else{
-       const resp=await axios.post("http://localhost:3000/user/signup",{
-            email:email.current?.value,
-            password:password.current?.value
-        },{withCredentials:true})
-     
-        console.log("custom backend",resp);
-        if(resp.data.data==="OTP_Send"){
-            console.log("email aa gaya!!",email);
-            navigate("/otp",{state:{email:resp.data.email}})
-        } else if(resp.data.message==="Email_exists"){
-            alert("Email Already Exists");
+    }
+     else{
+        if(confirmpassword.current?.value!=password.current?.value){
+            alert("Both password Not Matched");
             return;
-        }
-
-      }
+          } else{
+           const resp=await axios.post("http://localhost:3000/user/signup",{
+                email:email.current?.value,
+                password:password.current?.value
+            },{withCredentials:true})
+         
+            console.log("custom backend",resp);
+            if(resp.data.data==="OTP_Send"){
+                console.log("email aa gaya!!",email);
+                navigate("/otp",{state:{email:resp.data.email}})
+            } else if(resp.data.message==="Email_exists"){
+                alert("Email Already Exists");
+                return;
+            }
+    
+          }
+     }
 
 }
 

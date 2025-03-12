@@ -164,7 +164,7 @@ exports.userRouter.post("/verifyotp", (req, res) => __awaiter(void 0, void 0, vo
 }));
 exports.userRouter.post("/signin", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("recieved");
-    console.log(req.body);
+    console.log(req.body.email);
     try {
         const RequiredTypes = zod_1.default.object({
             email: zod_1.default.string().min(5).max(100).email(),
@@ -176,11 +176,14 @@ exports.userRouter.post("/signin", (req, res) => __awaiter(void 0, void 0, void 
         }
         console.log("here also");
         const { email } = req.body;
+        console.log("email is :", email);
         const CheckedByEmail = yield pclient.users.findUnique({
             where: {
                 email: email
             }
         });
+        console.log("here 2");
+        console.log(CheckedByEmail);
         if (!CheckedByEmail) {
             res.json({
                 message: "not_found"
@@ -198,13 +201,14 @@ exports.userRouter.post("/signin", (req, res) => __awaiter(void 0, void 0, void 
         const token = jsonwebtoken_1.default.sign({
             userId: CheckedByEmail.id
         }, JWT_KEY);
-        //  console.log(CheckedByEmail);
+        console.log("33");
         res.cookie("userId", CheckedByEmail.id, { httpOnly: false, secure: false });
         res.cookie("uidcookie", token, {
             httpOnly: false,
             secure: false
         });
         res.json({
+            message: "found",
             data: CheckedByEmail
         });
     }

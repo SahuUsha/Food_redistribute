@@ -185,7 +185,7 @@ userRouter.post("/verifyotp",async(req,res)=>{
 
 userRouter.post("/signin",async(req,res)=>{
     console.log("recieved")
-    console.log(req.body);
+    console.log(req.body.email);
    try {
      
     const RequiredTypes=z.object({
@@ -201,6 +201,7 @@ userRouter.post("/signin",async(req,res)=>{
     console.log("here also");
  
     const {email}=req.body;
+    console.log("email is :",email);
    
     
     const CheckedByEmail=await pclient.users.findUnique({
@@ -208,6 +209,9 @@ userRouter.post("/signin",async(req,res)=>{
            email:email 
         }
     })
+
+    console.log("here 2");
+    console.log(CheckedByEmail);
 
     if(!CheckedByEmail){
        res.json({
@@ -229,7 +233,7 @@ userRouter.post("/signin",async(req,res)=>{
         userId:CheckedByEmail.id
     },JWT_KEY);
     
-    //  console.log(CheckedByEmail);
+     console.log("33");
 
      res.cookie("userId",CheckedByEmail.id,{httpOnly:false,secure:false});
 
@@ -238,6 +242,7 @@ userRouter.post("/signin",async(req,res)=>{
         secure:false
     })
     res.json({
+        message:"found",
         data:CheckedByEmail
     })
 

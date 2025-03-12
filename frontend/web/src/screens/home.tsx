@@ -41,14 +41,16 @@ export const Home=()=>{
       }>
         <PoiMarkers pois={locations} />
    </Map>
-
-
           </div>
+          
           </div>
     </div>
 }
 
 const PoiMarkers = (props: {pois: Poi[]}) => {
+
+
+  console.log("cookies are : ",document.cookie);
   return (
     <>
       {props.pois.map( (poi: Poi) => (
