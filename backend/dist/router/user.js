@@ -323,6 +323,17 @@ exports.userRouter.post("/verifyaddress", (req, res) => __awaiter(void 0, void 0
         return;
     }
     const { email, id } = req.body;
+    const FindEmail = yield pclient.users.findFirst({
+        where: {
+            email
+        }
+    });
+    if (!FindEmail) {
+        res.json({
+            message: "Not_found"
+        });
+        return;
+    }
     const CreateOTP = otp_generator_1.default.generate(6, {
         upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false
     });
@@ -347,7 +358,7 @@ exports.userRouter.post("/VerifyAddressOTP", (req, res) => __awaiter(void 0, voi
         return;
     }
     const { otp, email, id } = req.body;
-    const FindEmail = yield pclient.users.findUnique({
+    const FindEmail = yield pclient.users.findFirst({
         where: {
             email
         }
@@ -385,5 +396,11 @@ exports.userRouter.post("/VerifyAddressOTP", (req, res) => __awaiter(void 0, voi
     });
     res.json({
         message: "Verified!!"
+    });
+}));
+exports.userRouter.get("/placesdata", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const placesData = yield pclient.placeInfo.findMany({});
+    res.json({
+        placesData
     });
 }));

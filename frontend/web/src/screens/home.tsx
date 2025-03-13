@@ -1,16 +1,30 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "../components/card"
 import { Navbar } from "../components/navbar"
 // import { GoogleMap,LoadScript,Marker } from "@react-google-maps/api"
-import {Map, AdvancedMarker, MapCameraChangedEvent,Pin}  from '@vis.gl/react-google-maps';
-type Poi ={ key: string, location: google.maps.LatLngLiteral }
-const locations: Poi[] = [
-];
+import {Map, AdvancedMarker,Pin}  from '@vis.gl/react-google-maps';
+import axios from "axios";
+type Poi ={location: {lat:number;lng:number }}
+// const locations: Poi[] =[];
 
 export const Home=()=>{
 
+  const [locations,setlocations]=useState<Poi[]>([]);
 
+      useEffect(()=>{
+         axios.get("http://localhost:3000/user/placesdata").then((resp)=>{
+          console.log(resp);
+           const formatedData=(resp.data.placesData).map((data:any)=>({
+            location:{
+              lat:data.Lattitude,
+              lng:data.Longitude
+            }
+           }))
+           setlocations(formatedData);
+         })  
+      },[])
     
+      console.log("areay is : ",locations);
  
     return <div className="h-screen w-full">
           <Navbar/>
@@ -28,10 +42,7 @@ export const Home=()=>{
    <Map
       defaultZoom={13}
       mapId='83980e1ef53c852d'
-      defaultCenter={ { lat: 21.1458, lng: 79.0882 } }
-      onCameraChanged={ (ev: MapCameraChangedEvent) =>
-        console.log('camera changed:', ev.detail.center, 'zoom:', ev.detail.zoom)
-      }>
+      defaultCenter={ { lat: 21.1458, lng: 79.0882 } } >
         <PoiMarkers pois={locations} />
    </Map>
           </div>
@@ -43,12 +54,13 @@ export const Home=()=>{
 const PoiMarkers = (props: {pois: Poi[]}) => {
 
 
-  console.log("cookies are : ",document.cookie);
+  console.log("pros are s:",props.pois);
   return (
     <>
+  
+  
       {props.pois.map( (poi: Poi) => (
         <AdvancedMarker
-          key={poi.key}
           position={poi.location}>
         <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />
         </AdvancedMarker>

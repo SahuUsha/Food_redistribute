@@ -391,6 +391,18 @@ userRouter.post("/verifyaddress",async(req,res)=>{
 
     const {email,id}=req.body;
 
+    const FindEmail=await pclient.users.findFirst({
+        where:{
+            email
+        }
+    })
+    if(!FindEmail){
+        res.json({
+            message:"Not_found"
+        })
+        return;
+    }
+
     const CreateOTP=otpgenerator.generate(6,{
         upperCaseAlphabets:false,lowerCaseAlphabets:false,specialChars:false
       })
@@ -424,7 +436,7 @@ userRouter.post("/VerifyAddressOTP",async(req,res)=>{
     const {otp,email,id}=req.body;
    
 
-    const FindEmail=await pclient.users.findUnique({
+    const FindEmail=await pclient.users.findFirst({
         where:{
             email
         }
@@ -467,4 +479,14 @@ userRouter.post("/VerifyAddressOTP",async(req,res)=>{
     res.json({
         message:"Verified!!"
     })
+})
+
+userRouter.get("/placesdata",async(req,res)=>{
+        
+  const placesData=await pclient.placeInfo.findMany({});
+   
+  res.json({
+    placesData
+  })
+
 })

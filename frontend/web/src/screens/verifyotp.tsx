@@ -25,6 +25,9 @@ export const VerifyOtp=()=>{
     console.log(resp);
     if(resp.data.message==="Verified!!"){
          navigate("/");
+    } else if(resp.data.message==="Not_found"){
+      alert("Enter Your Email that Linked To your Account");
+      return;
     }
    }
   }

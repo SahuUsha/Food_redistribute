@@ -26,6 +26,9 @@ export const VerifyAcc=()=>{
       console.log(resp);
       if(resp.data.message==="OTP_send_to_your_email"){
         navigate("/verifyotp",{state:data});
+      } else if(resp.data.message==="Not_found"){
+        alert("Enter Your Email that Linked To your Account");
+      return;
       }
     }
   }
