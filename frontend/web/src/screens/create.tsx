@@ -20,8 +20,7 @@ export const Create=()=>{
             <input className="h-10 rounded-xl border-1 p-2" type="text" placeholder="Description.."/>
             <input className="h-10 rounded-xl border-1 p-2" type="text" placeholder="Set Price"/>
             <input type="file"/>
-            <input className="h-10 rounded-xl border-1 p-2" placeholder="Location.." />
-            <button onClick={()=>navigate("/verifyacc")} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 1/2</button>
+            <button onClick={()=>navigate("/location")} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 1/3</button>
            </div>
 
            </div>

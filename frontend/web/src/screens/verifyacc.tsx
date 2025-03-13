@@ -18,8 +18,8 @@ export const VerifyAcc=()=>{
                         <input className="h-10 w-64 border-1 outline-none p-4 rounded-xl" type="text" placeholder="Enter Your Email" />
                       </div>
 
-                      <button  onClick={()=>navigate("/verifyotp")} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 2/2</button>
-                      <button onClick={()=>navigate("/create")} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Back</button>
+                      <button  onClick={()=>navigate("/verifyotp")} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 3/3</button>
+                      <button onClick={()=>navigate("/location")} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Back</button>
 
                   </div>
           </div>
