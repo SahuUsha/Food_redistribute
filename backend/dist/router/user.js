@@ -264,3 +264,50 @@ exports.userRouter.post("/resend", (req, res) => __awaiter(void 0, void 0, void 
         message: "OTP_send_to_your_email"
     });
 }));
+exports.userRouter.post("/create", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const token = req.cookies.uidcookie;
+    if (!token) {
+        res.json({
+            message: "unauths"
+        });
+        return;
+    }
+    const { name, mobileNo, description, price } = req.body;
+    const resp = yield pclient.placeInfo.create({
+        data: {
+            name: name,
+            phoneNo: mobileNo,
+            Description: description,
+            Price: price
+        }
+    });
+    console.log(resp);
+    res.json({
+        id: resp.id,
+        message: "data_added"
+    });
+}));
+exports.userRouter.post("/address", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const token = req.cookies.uidcookie;
+    if (!token) {
+        res.json({
+            message: "unauths"
+        });
+        return;
+    }
+    const { id, lattitude, longitude, address } = req.body;
+    const resp = yield pclient.placeInfo.update({
+        where: {
+            id: id
+        },
+        data: {
+            Lattitude: lattitude,
+            Longitude: longitude,
+            Address: address
+        }
+    });
+    console.log(resp);
+    res.json({
+        message: "done"
+    });
+}));

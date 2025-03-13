@@ -278,6 +278,7 @@ userRouter.get("/auths",async(req,res)=>{
 
 userRouter.post("/resend",async(req,res)=>{
       const token=req.cookies.uidcookie;
+      console.log("yaha par");
 
       if(!token){
         res.json({
@@ -287,6 +288,8 @@ userRouter.post("/resend",async(req,res)=>{
       }
 
       const {email}=req.body;
+
+      console.log(email);
 
       const deleteOTPRecord=await pclient.otpmodel.delete({
         where:{
@@ -313,3 +316,165 @@ userRouter.post("/resend",async(req,res)=>{
 
 })
 
+
+userRouter.post("/create",async(req,res)=>{
+       
+    const token=req.cookies.uidcookie;
+        if(!token){
+            res.json({
+                message:"unauths"
+            })
+            return;
+        }   
+
+
+       const {name,mobileNo,description,price}=req.body;
+      const resp= await pclient.placeInfo.create({
+            data:{
+                name:name,
+                phoneNo:mobileNo,
+                Description:description,
+               Price:price
+            }
+        })
+
+        console.log(resp);
+
+        res.json({
+            id:resp.id,
+            message:"data_added"
+        })
+
+})
+
+userRouter.post("/address",async(req,res)=>{
+        
+    const token=req.cookies.uidcookie;
+        if(!token){
+            res.json({
+                message:"unauths"
+            })
+            return;
+        }   
+
+        const {id,lattitude,longitude,address}=req.body;
+
+      const resp=await pclient.placeInfo.update({
+            where:{
+                id:id
+            },
+            data:{
+             Lattitude:lattitude,
+             Longitude:longitude,
+             Address:address          
+            }
+        })
+
+        console.log(resp);
+
+        res.json({
+            message:"done"
+        })
+})
+
+
+userRouter.post("/verifyaddress",async(req,res)=>{
+    const token=req.cookies.uidcookie;
+    console.log("yaha par");
+
+    if(!token){
+      res.json({
+          message:"not_signedIn"
+      })
+      return;
+    }
+
+    const {email,id}=req.body;
+
+    // const resp=await pclient.placeInfo.update({
+    //     where:{
+    //         id:id
+    //     },
+    //     data:{
+    //    email:email       
+    //     }
+    // })
+
+
+    const CreateOTP=otpgenerator.generate(6,{
+        upperCaseAlphabets:false,lowerCaseAlphabets:false,specialChars:false
+      })
+      await sendemail(email,"OTP-VERIFICATION",CreateOTP);
+
+
+      const CreateOTPEntryInDB=await pclient.otpmodel.create({
+        data:{
+            email:email,
+            otp:CreateOTP
+        }
+     })
+
+     res.json({
+        message:"OTP_send_to_your_email"
+     })
+})
+
+userRouter.post("/VerifyAddressOTP",async(req,res)=>{
+             
+    const token=req.cookies.uidcookie;
+    console.log("here");
+
+    if(!token){
+        res.json({
+            message:"Not_SignedIn"
+        })
+        return;
+    }
+    
+    const {otp,email,id}=req.body;
+   
+
+    const FindEmail=await pclient.users.findUnique({
+        where:{
+            email
+        }
+    })
+    if(!FindEmail){
+        res.json({
+            message:"Not_found"
+        })
+        return;
+    }
+
+    // console.log("here also")
+    const FindOTPInDB=await pclient.otpmodel.findUnique({
+        where:{
+            otp
+        }
+    })
+        
+    if(!FindOTPInDB){
+        res.json({
+            message:"Invalid_otp"
+        })
+        return;
+    }
+    const updateAddress=await pclient.placeInfo.update({
+        where:{
+            id:id
+        },
+        data:{
+            Verified:true
+        }
+    })
+
+    const deleteOTPRecord=await pclient.otpmodel.delete({
+        where:{
+            otp:otp
+        }
+    })
+
+    res.json({
+        message:"Verified!!"
+    })
+})

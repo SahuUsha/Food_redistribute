@@ -1,13 +1,42 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navbar } from "../components/navbar";
-import { useNavigate } from "react-router-dom";
-import { InfoWindow } from "react-google-maps";
+import { useLocation, useNavigate } from "react-router-dom";
+// import { InfoWindow } from "react-google-maps";
+import axios from "axios";
 
 export const Location=()=>{
     const navigate=useNavigate();
+    const addressId=useLocation().state;
+    console.log("my address Id is : ",location);
 
      const mapRef = useRef<HTMLDivElement>(null);
       const myLatlng = { lat:19.0760, lng:72.8777};
+
+      const [lattitude,setlattitude]=useState("");
+      const [longitude,setlongitude]=useState("");
+      const addressRef=useRef<HTMLInputElement>(null);
+
+
+      const handleAddress=async()=>{
+
+        if(addressRef.current?.value===""){
+            alert("Please Enter Valid Address");
+            return;
+        } else{
+            const resp=await axios.post("http://localhost:3000/user/address",{
+                id:addressId,
+                lattitude:lattitude,
+                longitude:longitude,
+                address:addressRef.current?.value
+            },{withCredentials:true})
+            if(resp.data.message==="done"){
+                navigate("/verifyacc")
+            }
+    
+            console.log(resp);
+        }
+     
+      }
     
     
       useEffect(() => {
@@ -33,12 +62,13 @@ export const Location=()=>{
               infoWindow = new google.maps.InfoWindow({
                 position: mapsMouseEvent.latLng,
               });
+              console.log(mapsMouseEvent.latLng.toJSON())
+              setlattitude(mapsMouseEvent.latLng.toJSON().lat);
+              setlongitude(mapsMouseEvent.latLng.toJSON().lng);
               infoWindow.setContent(
-                JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2),
-                // JSON.stringify("Thanks for Sharing Your Location")
+                JSON.stringify("Thanks for Sharing Your Location")
               );
               infoWindow.open(map);
-              console.log("Info : ",infoWindow)
             });
           }
         }
@@ -55,8 +85,8 @@ export const Location=()=>{
      </div>
 
      <div className="w-full flex flex-col justify-center items-center mt-4">
-     <input className="h-10 w-1/2 rounded-xl border-1 p-2" type="text" placeholder="Enter Your Correct Address"/>
-     <button onClick={()=>navigate("/verifyacc")} className="h-10 w-1/2 mt-2 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 2/3</button>
+     <input ref={addressRef} className="h-10 w-1/2 rounded-xl border-1 p-2" type="text" placeholder="Enter Your Correct Address"/>
+     <button onClick={handleAddress} className="h-10 w-1/2 mt-2 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 2/3</button>
      <button onClick={()=>navigate("/create")} className="h-10 w-1/2 mt-2 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Back</button>
 
      </div>

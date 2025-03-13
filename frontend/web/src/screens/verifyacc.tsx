@@ -1,8 +1,29 @@
 import { useNavigate } from "react-router-dom"
 import { Navbar } from "../components/navbar"
+import axios from "axios";
+import { useRef } from "react";
 
 export const VerifyAcc=()=>{
   const navigate=useNavigate();
+  const emailRef=useRef<HTMLInputElement>(null);
+
+
+  const verifyAccount=async()=>{
+
+    if(emailRef.current?.value===""){
+      alert("Please Enter Email Address!!");
+      return;
+    }
+    else{
+     const resp=await axios.post("http://localhost:3000/user/resend",{
+        email:emailRef.current?.value
+      },{withCredentials:true})
+      console.log(resp);
+      if(resp.data.message==="OTP_send_to_your_email"){
+        navigate("/verifyotp");
+      }
+    }
+  }
 
     return <div className="h-screen w-full flex flex-col">
         <Navbar/>
@@ -18,7 +39,7 @@ export const VerifyAcc=()=>{
                         <input className="h-10 w-64 border-1 outline-none p-4 rounded-xl" type="text" placeholder="Enter Your Email" />
                       </div>
 
-                      <button  onClick={()=>navigate("/verifyotp")} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 3/3</button>
+                      <button  onClick={verifyAccount} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 3/3</button>
                       <button onClick={()=>navigate("/location")} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Back</button>
 
                   </div>

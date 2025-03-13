@@ -24,11 +24,13 @@ model otpmodel{
 
 model placeInfo{
  id String @id @unique @default(uuid())
- email String
- name String
- phoneNo String
- Description String
- Price String
- Lattitude String
- Longitude String
+ name String?
+ email String?
+ phoneNo String?
+ Description String?
+ Price String?
+ Lattitude Float?
+ Longitude Float?
+ Address String?
+ Verified Boolean @default(false)
 }

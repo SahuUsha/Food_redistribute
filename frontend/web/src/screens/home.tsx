@@ -5,17 +5,6 @@ import { Navbar } from "../components/navbar"
 import {Map, AdvancedMarker, MapCameraChangedEvent,Pin}  from '@vis.gl/react-google-maps';
 type Poi ={ key: string, location: google.maps.LatLngLiteral }
 const locations: Poi[] = [
-  // {key: 'Pension Nagar', location: { lat: 21.14631, lng: 79.08491 }},
-  // {key: 'Pension Nagar', location: { lat: 20.14631, lng: 79.78491 }},
-  // {key: 'Pension Nagar', location: { lat: 20.15631, lng: 79.78491 }},
-  // {key: 'Pension Nagar', location: { lat: 20.16631, lng: 79.78491 }},
-  // {key: 'Pension Nagar', location: { lat: 22.14631, lng: 79.48491 }},
-  // {key: 'Pension Nagar', location: { lat: 21.54631, lng: 80.08491 }},
-  // {key: 'Pension Nagar', location: { lat: 21.14631, lng: 79.08491 }},
-  // {key: 'wardha', location: { lat: 20.7453, lng: 78.6022 }},
-  // // {key: 'Pension Nagrar', location: { lat: 25.14631, lng: 72.08491 }},
-  // // {key: 'Pension Nagrar', location: { lat: 29.14631, lng: 79.08491 }},
-  // {key: 'Wardha', location: { lat: 18.5925785, lng: 73.7183639 }},
 ];
 
 export const Home=()=>{
