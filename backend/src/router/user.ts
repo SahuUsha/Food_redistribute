@@ -391,16 +391,6 @@ userRouter.post("/verifyaddress",async(req,res)=>{
 
     const {email,id}=req.body;
 
-    // const resp=await pclient.placeInfo.update({
-    //     where:{
-    //         id:id
-    //     },
-    //     data:{
-    //    email:email       
-    //     }
-    // })
-
-
     const CreateOTP=otpgenerator.generate(6,{
         upperCaseAlphabets:false,lowerCaseAlphabets:false,specialChars:false
       })

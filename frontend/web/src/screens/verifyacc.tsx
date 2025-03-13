@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Navbar } from "../components/navbar"
 import axios from "axios";
 import { useRef } from "react";
@@ -6,21 +6,26 @@ import { useRef } from "react";
 export const VerifyAcc=()=>{
   const navigate=useNavigate();
   const emailRef=useRef<HTMLInputElement>(null);
+  const addressId=useLocation().state;
 
 
   const verifyAccount=async()=>{
+    const email=emailRef.current?.value;
+    const data={addressId,email};
 
     if(emailRef.current?.value===""){
       alert("Please Enter Email Address!!");
       return;
     }
     else{
-     const resp=await axios.post("http://localhost:3000/user/resend",{
-        email:emailRef.current?.value
+      console.log(emailRef.current?.value);
+     const resp=await axios.post("http://localhost:3000/user/verifyaddress",{
+        email:emailRef.current?.value,
+        id:addressId
       },{withCredentials:true})
       console.log(resp);
       if(resp.data.message==="OTP_send_to_your_email"){
-        navigate("/verifyotp");
+        navigate("/verifyotp",{state:data});
       }
     }
   }
@@ -36,7 +41,7 @@ export const VerifyAcc=()=>{
                       </div>
 
                       <div>
-                        <input className="h-10 w-64 border-1 outline-none p-4 rounded-xl" type="text" placeholder="Enter Your Email" />
+                        <input  ref={emailRef} className="h-10 w-64 border-1 outline-none p-4 rounded-xl" type="text" placeholder="Enter Your Email" />
                       </div>
 
                       <button  onClick={verifyAccount} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 3/3</button>

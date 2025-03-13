@@ -238,6 +238,7 @@ exports.userRouter.get("/auths", (req, res) => __awaiter(void 0, void 0, void 0,
 }));
 exports.userRouter.post("/resend", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.cookies.uidcookie;
+    console.log("yaha par");
     if (!token) {
         res.json({
             message: "not_signedIn"
@@ -245,6 +246,7 @@ exports.userRouter.post("/resend", (req, res) => __awaiter(void 0, void 0, void 
         return;
     }
     const { email } = req.body;
+    console.log(email);
     const deleteOTPRecord = yield pclient.otpmodel.delete({
         where: {
             email: email
@@ -309,5 +311,79 @@ exports.userRouter.post("/address", (req, res) => __awaiter(void 0, void 0, void
     console.log(resp);
     res.json({
         message: "done"
+    });
+}));
+exports.userRouter.post("/verifyaddress", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const token = req.cookies.uidcookie;
+    console.log("yaha par");
+    if (!token) {
+        res.json({
+            message: "not_signedIn"
+        });
+        return;
+    }
+    const { email, id } = req.body;
+    const CreateOTP = otp_generator_1.default.generate(6, {
+        upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false
+    });
+    yield sendemail(email, "OTP-VERIFICATION", CreateOTP);
+    const CreateOTPEntryInDB = yield pclient.otpmodel.create({
+        data: {
+            email: email,
+            otp: CreateOTP
+        }
+    });
+    res.json({
+        message: "OTP_send_to_your_email"
+    });
+}));
+exports.userRouter.post("/VerifyAddressOTP", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const token = req.cookies.uidcookie;
+    console.log("here");
+    if (!token) {
+        res.json({
+            message: "Not_SignedIn"
+        });
+        return;
+    }
+    const { otp, email, id } = req.body;
+    const FindEmail = yield pclient.users.findUnique({
+        where: {
+            email
+        }
+    });
+    if (!FindEmail) {
+        res.json({
+            message: "Not_found"
+        });
+        return;
+    }
+    // console.log("here also")
+    const FindOTPInDB = yield pclient.otpmodel.findUnique({
+        where: {
+            otp
+        }
+    });
+    if (!FindOTPInDB) {
+        res.json({
+            message: "Invalid_otp"
+        });
+        return;
+    }
+    const updateAddress = yield pclient.placeInfo.update({
+        where: {
+            id: id
+        },
+        data: {
+            Verified: true
+        }
+    });
+    const deleteOTPRecord = yield pclient.otpmodel.delete({
+        where: {
+            otp: otp
+        }
+    });
+    res.json({
+        message: "Verified!!"
     });
 }));

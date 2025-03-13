@@ -30,7 +30,7 @@ export const Location=()=>{
                 address:addressRef.current?.value
             },{withCredentials:true})
             if(resp.data.message==="done"){
-                navigate("/verifyacc")
+                navigate("/verifyacc",{state:addressId})
             }
     
             console.log(resp);
