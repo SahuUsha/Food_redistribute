@@ -10,10 +10,12 @@ type Poi ={location: {lat:number;lng:number }}
 export const Home=()=>{
 
   const [locations,setlocations]=useState<Poi[]>([]);
+  const [carddata,setcarddata]=useState([]);
 
       useEffect(()=>{
          axios.get("http://localhost:3000/user/placesdata").then((resp)=>{
           console.log(resp);
+          setcarddata(resp.data.placesData)
            const formatedData=(resp.data.placesData).map((data:any)=>({
             location:{
               lat:data.Lattitude,
@@ -24,17 +26,20 @@ export const Home=()=>{
          })  
       },[])
     
-      console.log("areay is : ",locations);
+      // console.log("areay is : ",locations);
+      console.log("card data is : ",carddata)
  
-    return <div className="h-screen w-full">
+    return <div className="h-screen w-full overflow-y-none">
           <Navbar/>
 
           <div className="flex">
-          <div className="h-9/10 flex justify-center gap-4 flex-wrap w-1/2">
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+          <div className="max-h-9/10 flex items-center gap-4 flex-wrap w-1/2">
+          { carddata.map(({id,email,name,Address,Description,Price})=>
+          // console.log(data)
+             <Card id={id} name={name} email={email} Description={Description} Address={Address} Price={Price}/>
+          )
+           
+          }
           </div>
 
           <div className="rounded-xl h-[600px] w-1/2 mt-8">

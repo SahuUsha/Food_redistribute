@@ -1,6 +1,8 @@
-export const Card=()=>{
+export const Card=({name,id,Price,Address,Description,email}:any)=>{
+  // console.log("my data arrive ",name);
+  // console.log("my place data arrive ",placedata);
 
-    return <div className="h-80 w-80 mt-2 shadow-xl cursor-pointer rounded-xl">
+    return <div className="h-80 w-80 mt-2 ml-4 shadow-xl cursor-pointer rounded-xl">
            
            <img className="h-48 w-80 p-2 rounded-xl cover" src="https://images.pexels.com/photos/3797991/pexels-photo-3797991.jpeg?cs=srgb&dl=pexels-houzlook-3797991.jpg&fm=jpg" alt="" />
             
@@ -8,15 +10,15 @@ export const Card=()=>{
              
              <div className="flex ml-2">
                 <img className="h-6 cover" src="https://icons.veryicon.com/png/o/miscellaneous/commonly-used-icon-1/location-113.png" alt="" />
-               <h1>Gitti khadan katol road nagpur</h1>
+               <h1>{Address}</h1>
              </div>
               
               <div className="ml-4">
-                Details :
+                Details : {Description}
               </div>
 
               <div className="ml-3 p-1">
-                Amount: 
+                Amount: {Price}
               </div>
 
               <div className="h-10 w-full flex items-center justify-center rounded-xl ">
