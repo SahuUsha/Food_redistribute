@@ -9,6 +9,7 @@ import { VerifyOtp } from "../screens/verifyotp"
 import { Waiting } from "../screens/waiting"
 import { OTP } from "../screens/otp"
 import { Location } from "../screens/location"
+import { Details } from "../screens/details"
 
 export const AppRoutes=()=>{
 
@@ -24,6 +25,7 @@ export const AppRoutes=()=>{
         <Route path="/uploading" element={<Waiting/>}/>
         <Route path="/location" element={<Location/>}/>
         <Route path="/otp" element={<OTP/>}/>
+        <Route path="/details" element={<Details/>}/>
       </Routes>
     </div>
 }
