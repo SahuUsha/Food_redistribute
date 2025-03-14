@@ -1,28 +1,43 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Navbar } from "../components/navbar"
 // import { PoiMarkers } from "./home";
 import {Map, Marker}  from '@vis.gl/react-google-maps';
+import Cal from "@calcom/embed-react";
+import { Meeting } from "./meeting";
+
+
+// import { CalcomWidget } from '@calcom/react-widget';
+
 // import { useState } from "react";
 
 export const Details=()=>{
+    const navigate=useNavigate();
     const data=useLocation().state;
-    console.log("data is here ::",data);
    let location={
         lat:data.Lattitude,
         lng:data.Longitude
       }
+
+
     return <div className="h-screen w-full overflow-none">
         <Navbar/>
           
           <div className="w-full h-9/10 flex flex-col mt-12 items-center">
                <div className="w-2/3 h-9/10">
-               <button className="h-10 w-full mt-2 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Back</button>
-                
+               <button onClick={()=>navigate("/")} className="h-10 w-full mt-2 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Back</button>
+               <button onClick={()=>navigate("/meeting")} className="h-10 w-full mt-2 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Want to talk?</button>
                <div className="flex ml-2 h-20 mt-4 flex flex-col justify-center rounded-xl shadow-md">
                 <div className="flex items-center mt-4 ml-2">
                 <img src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png" className="h-6 w-6 cover" alt="" />
                 <h1 className="text-xl font-semibold">Vedant Khasbage</h1>
                 </div>
+             </div>
+
+             <div>
+              
+             </div>
+
+             <div>
              </div>
 
              <div className="w-full h-5/10 mt-4 shadow-xl rounded-xl">

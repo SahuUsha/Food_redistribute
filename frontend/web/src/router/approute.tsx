@@ -10,6 +10,7 @@ import { Waiting } from "../screens/waiting"
 import { OTP } from "../screens/otp"
 import { Location } from "../screens/location"
 import { Details } from "../screens/details"
+import { Meeting } from "../screens/meeting"
 
 export const AppRoutes=()=>{
 
@@ -26,6 +27,7 @@ export const AppRoutes=()=>{
         <Route path="/location" element={<Location/>}/>
         <Route path="/otp" element={<OTP/>}/>
         <Route path="/details" element={<Details/>}/>
+        <Route path="/meeting" element={<Meeting/>}/>
       </Routes>
     </div>
 }
