@@ -344,6 +344,14 @@ exports.userRouter.post("/verifyaddress", (req, res) => __awaiter(void 0, void 0
             otp: CreateOTP
         }
     });
+    const addemailEntry = yield pclient.placeInfo.update({
+        where: {
+            id: id
+        },
+        data: {
+            email: email
+        }
+    });
     res.json({
         message: "OTP_send_to_your_email"
     });

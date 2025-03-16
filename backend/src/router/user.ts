@@ -416,6 +416,15 @@ userRouter.post("/verifyaddress",async(req,res)=>{
         }
      })
 
+     const addemailEntry=await pclient.placeInfo.update({
+        where:{
+            id:id
+        },
+        data:{
+            email:email
+        }
+     })
+
      res.json({
         message:"OTP_send_to_your_email"
      })

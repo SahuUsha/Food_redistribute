@@ -8,6 +8,7 @@ export const Details=()=>{
 
     const navigate=useNavigate();
     const data=useLocation().state;
+    console.log("data aa gaya",data)
    let location={
         lat:data.Lattitude,
         lng:data.Longitude
