@@ -2,15 +2,10 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { Navbar } from "../components/navbar"
 // import { PoiMarkers } from "./home";
 import {Map, Marker}  from '@vis.gl/react-google-maps';
-import Cal from "@calcom/embed-react";
-import { Meeting } from "./meeting";
 
-
-// import { CalcomWidget } from '@calcom/react-widget';
-
-// import { useState } from "react";
 
 export const Details=()=>{
+
     const navigate=useNavigate();
     const data=useLocation().state;
    let location={

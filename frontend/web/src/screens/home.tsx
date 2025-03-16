@@ -33,7 +33,7 @@ export const Home=()=>{
           <Navbar/>
 
           <div className="flex">
-          <div className="max-h-9/10 flex items-center gap-4 flex-wrap w-1/2">
+          <div className="max-h-9/10 flex gap-4 flex-wrap w-1/2">
           { carddata.map(({id,email,name,Address,Description,Price,phoneNo,Lattitude,Longitude})=>
           // console.log(data)
              <Card Lattitude={Lattitude} Longitude={Longitude} phoneNo={phoneNo} id={id} name={name} email={email} Description={Description} Address={Address} Price={Price}/>
