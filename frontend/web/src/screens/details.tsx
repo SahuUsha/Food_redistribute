@@ -14,6 +14,7 @@ export const Details=()=>{
         lng:data.Longitude
       }
 
+      console.log(data.img)
 
     return <div className="h-screen w-full overflow-none">
         <Navbar/>
@@ -36,8 +37,8 @@ export const Details=()=>{
              <div>
              </div>
 
-             <div className="w-full h-5/10 mt-4 shadow-xl rounded-xl">
-                image will be here
+             <div className="w-full flex items-center justify-center h-5/10 mt-4 shadow-xl rounded-xl">
+               <img className="h-full w-1/2 cover" src={data.img} alt="" />
              </div>
 
              <div className="h-screen w-full mt-4">

@@ -25,6 +25,7 @@ model otpmodel{
 model placeInfo{
  id String @id @unique @default(uuid())
  name String?
+ img String
  email String?
  phoneNo String?
  Description String?

@@ -327,14 +327,17 @@ userRouter.post("/create",async(req,res)=>{
             return;
         }   
 
+        console.log(req.body);
 
-       const {name,mobileNo,description,price}=req.body;
+       const {name,mobileNo,description,price,img}=req.body;
+       console.log(img);
       const resp= await pclient.placeInfo.create({
             data:{
                 name:name,
                 phoneNo:mobileNo,
                 Description:description,
-               Price:price
+               Price:price,
+               img:img
             }
         })
 
@@ -424,7 +427,6 @@ userRouter.post("/verifyaddress",async(req,res)=>{
             email:email
         }
      })
-
      res.json({
         message:"OTP_send_to_your_email"
      })

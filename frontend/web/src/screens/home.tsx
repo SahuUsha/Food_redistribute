@@ -34,9 +34,9 @@ export const Home=()=>{
 
           <div className="flex">
           <div className="max-h-9/10 flex gap-4 flex-wrap w-1/2">
-          { carddata.map(({id,email,name,Address,Description,Price,phoneNo,Lattitude,Longitude})=>
+          { carddata.map(({img,id,email,name,Address,Description,Price,phoneNo,Lattitude,Longitude})=>
           // console.log(data)
-             <Card Lattitude={Lattitude} Longitude={Longitude} phoneNo={phoneNo} id={id} name={name} email={email} Description={Description} Address={Address} Price={Price}/>
+             <Card img={img} Lattitude={Lattitude} Longitude={Longitude} phoneNo={phoneNo} id={id} name={name} email={email} Description={Description} Address={Address} Price={Price}/>
           )
            
           }

@@ -274,13 +274,16 @@ exports.userRouter.post("/create", (req, res) => __awaiter(void 0, void 0, void 
         });
         return;
     }
-    const { name, mobileNo, description, price } = req.body;
+    console.log(req.body);
+    const { name, mobileNo, description, price, img } = req.body;
+    console.log(img);
     const resp = yield pclient.placeInfo.create({
         data: {
             name: name,
             phoneNo: mobileNo,
             Description: description,
-            Price: price
+            Price: price,
+            img: img
         }
     });
     console.log(resp);
