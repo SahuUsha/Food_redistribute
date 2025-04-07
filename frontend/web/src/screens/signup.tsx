@@ -119,7 +119,7 @@ const handleSignUp=useGoogleLogin({
 
 
             <button     onClick={handleManualSignUp}          type="submit"
-              className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-200"
+              className="w-full cursor-pointer bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-200"
             >
               Sign up
             </button>

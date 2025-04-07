@@ -33,8 +33,6 @@ export const Create = () => {
     }
 
     const putDataIntoDB = async () => {
-       
-
         console.log("indide db fn")
         if(imgRef.current.value==="" || imgRef.current.value==="undefined"){
             alert("Upload images");
@@ -67,9 +65,9 @@ export const Create = () => {
         <Navbar />
 
         <div className="w-full h-9/10 flex justify-center items-center">
-            <div className="h-8/10 shadow-xl w-1/3 flex flex-col items-center">
+            <div className="h-8/10 mt-32 shadow-xl w-1/3 flex flex-col items-center">
                 <div className="w-full flex justify-center items-center">
-                    <h1 className="text-black text-xl">upload correct details only</h1>
+                    <h1 className="text-black text-xl font-semibold">upload correct details only</h1>
                 </div>
 
                 <div className="flex flex-col gap-6 outline-none w-1/2 mt-16">
@@ -80,7 +78,7 @@ export const Create = () => {
                     <input onChange={hanldefiles} ref={imgRef} className="text-sm text-stone-500 file:mr-5 file:py-1 file:px-3 file:border-[1px] file:text-xs file:font-bold file:bg-stone-50 file:text-stone-700
    hover:file:cursor-pointer hover:file:bg-blue-50
    hover:file:text-blue-700" type="file" />
-                    <button onClick={putDataIntoDB} className="h-10 w-64 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 1/3</button>
+                    <button onClick={putDataIntoDB} className="h-10 w-64 text-black font-semibold cursor-pointer bg-[#D6F34B] rounded-xl">Step 1/3</button>
                 </div>
 
             </div>

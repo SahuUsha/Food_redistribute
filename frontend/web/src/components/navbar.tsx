@@ -28,8 +28,8 @@ export const Navbar=()=>{
     // }
 
     return  <nav className="fixed w-full bg-white z-50 px-6 py-4 shadow-sm">
-    <div className="max-w-7xl mx-auto flex items-center justify-between">
-      <div className="flex items-center gap-2">
+    <div className="flex items-center justify-between">
+      <div onClick={()=>navigate("/")} className="flex cursor-pointer items-center gap-2">
         <Heart className="w-8 h-8 text-emerald-600" />
         <span className="text-sm font-bold text-gray-500">FOOD REDISTRIBUTION</span>
       </div>

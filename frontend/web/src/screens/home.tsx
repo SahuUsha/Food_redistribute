@@ -36,10 +36,13 @@ export const Home=()=> {
         {/* Content */}
         <div className="relative h-full flex flex-col items-center justify-center text-center text-white px-4">
           <h1 className="text-6xl font-bold max-w-5xl leading-tight mb-6">
-            Fundraising For The People & Causes You Care.
+          "Feeding Hope, One Plate at a Time."
           </h1>
           <p className="text-lg text-gray-300 max-w-3xl mb-12">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id malesuada justo. Nullam a augue sem. Aliquam sed massa ante. Donec aliquam mauris sem, vitae sagittis dui viverra in.
+          "A plate of food, a spark of grace,
+A smile appears on every face.
+We fight hunger with every meal,
+Together we help the world to heal."
           </p>
           <div className="flex gap-4">
             <button onClick={()=>navigate("/dashboard")} className="bg-[#D6F34B] cursor-pointer text-black px-8 py-4 rounded-full font-medium flex items-center gap-2">

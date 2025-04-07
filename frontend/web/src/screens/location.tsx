@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { Navbar } from "../components/navbar";
+// import { Navbar } from "../components/navbar";
 import { useLocation, useNavigate } from "react-router-dom";
 // import { InfoWindow } from "react-google-maps";
 import axios from "axios";
+import { Navbar } from "../components/navbar";
 
 export const Location=()=>{
     const navigate=useNavigate();
     const addressId=useLocation().state;
-    console.log("my address Id is : ",location);
+    // console.log("my address Id is : ",location);
 
      const mapRef = useRef<HTMLDivElement>(null);
       const myLatlng = { lat:19.0760, lng:72.8777};
@@ -78,13 +79,13 @@ export const Location=()=>{
 
     return <div className="h-screen w-full flex flex-col items-center">
       <Navbar/>
-     <div className="w-full flex justify-center flex-col mt-8 items-center">
+     <div className="w-full mt-20 flex justify-center flex-col mt-8 items-center">
      <h1 className="text-xl font-semibold mb-8">Click On Your Exact Location From Below Map</h1>
        </div>
-       <div className="h-1/2 w-2/3 flex " ref={mapRef}>
+       <div className="h-[400px] w-2/3 flex " ref={mapRef}>
      </div>
 
-     <div className="w-full flex flex-col justify-center items-center mt-4">
+     <div className="w-full flex flex-col justify-center items-center mt-1">
      <input ref={addressRef} className="h-10 w-1/2 rounded-xl border-1 p-2" type="text" placeholder="Enter Your Correct Address"/>
      <button onClick={handleAddress} className="h-10 w-1/2 mt-2 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Step 2/3</button>
      <button onClick={()=>navigate("/create")} className="h-10 w-1/2 mt-2 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Back</button>

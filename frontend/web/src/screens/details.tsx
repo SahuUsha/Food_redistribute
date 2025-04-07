@@ -16,11 +16,11 @@ export const Details=()=>{
 
       console.log(data.img)
 
-    return <div className="h-screen w-full overflow-none">
+    return <div className="h-screen w-full">
         <Navbar/>
           
-          <div className="w-full h-9/10 flex flex-col mt-12 items-center">
-               <div className="w-2/3 h-9/10">
+          <div className="w-full h-9/10 flex flex-col items-center">
+               <div className="w-2/3 mt-20 h-9/10">
                <button onClick={()=>navigate("/")} className="h-10 w-full mt-2 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Back</button>
                <button onClick={()=>navigate("/meeting")} className="h-10 w-full mt-2 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">Want to talk?</button>
                <div className="flex ml-2 h-20 mt-4 flex flex-col justify-center rounded-xl shadow-md">
