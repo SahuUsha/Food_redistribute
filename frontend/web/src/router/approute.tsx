@@ -1,7 +1,7 @@
 import {Route, Routes } from "react-router-dom"
 import { SignIn } from "../screens/signin"
 import { SignUp } from "../screens/signup"
-import { Home } from "../screens/home"
+import { Dashboard } from "../screens/dashboard"
 import { Create } from "../screens/create"
 import { About } from "../screens/about"
 import { VerifyAcc } from "../screens/verifyacc"
@@ -11,14 +11,16 @@ import { OTP } from "../screens/otp"
 import { Location } from "../screens/location"
 import { Details } from "../screens/details"
 import { Meeting } from "../screens/meeting"
+import { Home } from "../screens/home"
 
 export const AppRoutes=()=>{
 
     return <div>
       <Routes>
+        <Route path="/" element={<Home/>}/>
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/signup" element={<SignUp/>}/>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/create" element={<Create/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/verifyacc" element={<VerifyAcc/>}/>

@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
+import { Heart, ArrowRight } from 'lucide-react';
+
+
 
 export const Navbar=()=>{
 
@@ -16,25 +19,36 @@ export const Navbar=()=>{
       })
     },[])
 
-    const logoutUser=async()=>{
-     const resp=await axios.post("http://localhost:3000/user/logout",{},{withCredentials:true});
-     if(resp.data.message==="logout"){
-        navigate("/signin");
-     }
-     console.log(resp);
-    }
+    // const logoutUser=async()=>{
+    //  const resp=await axios.post("http://localhost:3000/user/logout",{},{withCredentials:true});
+    //  if(resp.data.message==="logout"){
+    //     navigate("/signin");
+    //  }
+    //  console.log(resp);
+    // }
 
-    return <div className="h-1/10 w-full items-center shadow-lg font-sans flex justify-between">
-             
-             <img src="hh.png" className="h-24 cover ml-24" alt="" />
-
-             <div className="list-none justify-center items-center flex gap-8 mr-64">
-                <li onClick={()=> navigate("/")} className="font-semibold cursor-pointer"><Link to="/"/>HOME</li>
-                {auth? <li onClick={logoutUser} className="font-semibold cursor-pointer">LOGOUT</li> :
-                <li onClick={()=> navigate("/signup")} className="font-semibold cursor-pointer"><Link to="/signup"/>SIGNUP</li>}
-                <li onClick={()=> navigate("/about")} className="font-semibold cursor-pointer"><Link to="/about"/>ABOUT</li>
-                <button onClick={()=> navigate("/create")} className="h-10 w-36 text-white font-semibold flex justify-center items-center cursor-pointer bg-[#7643ED] rounded-xl">Create <span className="text-3xl ml-1 mb-1">+</span></button>
-             </div>
-
+    return  <nav className="fixed w-full bg-white z-50 px-6 py-4 shadow-sm">
+    <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <Heart className="w-8 h-8 text-emerald-600" />
+        <span className="text-sm font-bold text-gray-500">FOOD REDISTRIBUTION</span>
+      </div>
+      
+      <div className="flex items-center gap-8">
+        <div className="flex items-center gap-6">
+          <a onClick={()=>navigate("/")} className=" cursor-pointer font-medium">Home</a>
+          <a onClick={()=>navigate("/dashboard")} className="font-medium cursor-pointer">Dashboard</a>
+          <a onClick={()=>navigate("/about")} className="font-medium cursor-pointer">About</a>
+        </div>
+        <button className="bg-[#D6F34B] text-black px-6 py-3 rounded-full font-medium flex items-center gap-2">
+          Contact Us
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      </div>
     </div>
+  </nav>
 }
+
+
+
+

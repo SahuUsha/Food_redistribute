@@ -1,75 +1,98 @@
-import { useEffect, useState } from "react";
-import { Card } from "../components/card"
-import { Navbar } from "../components/navbar"
-// import { GoogleMap,LoadScript,Marker } from "@react-google-maps/api"
-import {Map, AdvancedMarker,Pin}  from '@vis.gl/react-google-maps';
-import axios from "axios";
-type Poi ={location: {lat:number;lng:number }}
-// const locations: Poi[] =[];
 
-export const Home=()=>{
+import {ArrowRight } from 'lucide-react';
+import { Navbar } from '../components/navbar';
+import SpotlightCard from '../components/SpotLightCard';
+import FlowingMenu from '../components/FlowingMenu';
+import { Footer } from '../components/footer';
+import { useNavigate } from 'react-router-dom';
 
- const [locations,setlocations]=useState<Poi[]>([]);
-  const [carddata,setcarddata]=useState([]);
+const demoItems = [
+    { link: '#', text: 'Mojave', image: 'https://picsum.photos/600/400?random=1' },
+    { link: '#', text: 'Sonoma', image: 'https://picsum.photos/600/400?random=2' },
+    { link: '#', text: 'Monterey', image: 'https://picsum.photos/600/400?random=3' },
+    { link: '#', text: 'Sequoia', image: 'https://picsum.photos/600/400?random=4' }
+  ];
+export const Home=()=> {
+    const navigate=useNavigate();
 
-      useEffect(()=>{
-         axios.get("http://localhost:3000/user/placesdata").then((resp)=>{
-          console.log(resp);
-          setcarddata(resp.data.placesData)
-           const formatedData=(resp.data.placesData).map((data:any)=>({
-            location:{
-              lat:data.Lattitude,
-              lng:data.Longitude
-            }
-           }))
-           setlocations(formatedData);
-         })  
-      },[])
+  return (
+    <div className="min-h-screen bg-white">
     
-      // console.log("areay is : ",locations);
-      console.log("card data is : ",carddata)
- 
-    return <div className="h-screen w-full overflow-y-none">
-          <Navbar/>
+    <Navbar/>
 
-          <div className="flex">
-          <div className="max-h-9/10 flex gap-4 flex-wrap w-1/2">
-          { carddata.map(({img,id,email,name,Address,Description,Price,phoneNo,Lattitude,Longitude})=>
-          // console.log(data)
-             <Card img={img} Lattitude={Lattitude} Longitude={Longitude} phoneNo={phoneNo} id={id} name={name} email={email} Description={Description} Address={Address} Price={Price}/>
-          )
-           
-          }
-          </div>
+      {/* Hero Section */}
+      <div className="relative h-screen">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-black"
+          style={{
+            backgroundImage: 'url("https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'brightness(0.4)'
+          }}
+        />
 
-          <div className="rounded-xl h-[600px] w-1/2 mt-8">
-         
-   <Map
-      defaultZoom={13}
-      mapId='83980e1ef53c852d'
-      defaultCenter={ { lat: 21.1458, lng: 79.0882 } } >
-        <PoiMarkers pois={locations} />
-   </Map>
+        {/* Content */}
+        <div className="relative h-full flex flex-col items-center justify-center text-center text-white px-4">
+          <h1 className="text-6xl font-bold max-w-5xl leading-tight mb-6">
+            Fundraising For The People & Causes You Care.
+          </h1>
+          <p className="text-lg text-gray-300 max-w-3xl mb-12">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id malesuada justo. Nullam a augue sem. Aliquam sed massa ante. Donec aliquam mauris sem, vitae sagittis dui viverra in.
+          </p>
+          <div className="flex gap-4">
+            <button onClick={()=>navigate("/dashboard")} className="bg-[#D6F34B] cursor-pointer text-black px-8 py-4 rounded-full font-medium flex items-center gap-2">
+              Dashboard
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <button onClick={()=>navigate("/signup")} className="border-2 cursor-pointer border-white px-8 py-4 rounded-full font-medium flex items-center gap-2">
+              Register
+            </button>
           </div>
-          
-          </div>
+        </div>
+      </div>
+
+      <div className='w-full h-screen bg-black flex flex-col'>
+                
+                
+             <div className='w-full flex flex-col items-center h-1/2 justify-center'>
+              <h1 className='text-8xl text-white uppercase font-bold'>Share Your Kindness</h1>
+              <h1 className='text-8xl text-white uppercase font-bold'> With EveryOne!!</h1>
+               <button onClick={()=>navigate("/dashboard")} className='h-12 cursor-pointer w-48 rounded-4xl font-semibold mt-8 bg-[#D6F34B]'>Donate Now</button>
+             </div>
+             <div className='flex w-full gap-12 items-center justify-center'>
+
+             <SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(225, 230, 231, 0.27)">
+"There are people in the world so hungry, that God cannot appear to them except in the form of bread." — Mahatma Gandhi
+</SpotlightCard>
+
+<SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(225, 230, 231, 0.27)">
+"Hunger is not a problem. It is an obscenity. How wonderful it is that nobody need wait a single moment before starting to improve the world." — Anne Frank
+</SpotlightCard>
+
+
+
+
+<SpotlightCard className="custom-spotlight-card" spotlightColor="rgba(225, 230, 231, 0.27)">
+"If you can’t feed a hundred people, then feed just one." — Mother Teresa
+</SpotlightCard>
+             </div>
+      </div>
+
+      <div className='h-2/3 w-full'>
+      <div style={{ height: '600px', position: 'relative' }}>
+  <FlowingMenu items={demoItems} />
+</div>
+      </div>
+
+      <div>
+        <Footer/>
+      </div>
+
+      
     </div>
+  );
 }
 
-export const PoiMarkers = (props: {pois: Poi[]}) => {
 
-
-  console.log("pros are s:",props.pois);
-  return (
-    <>
-  
-  
-      {props.pois.map( (poi: Poi) => (
-        <AdvancedMarker
-          position={poi.location}>
-        <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />
-        </AdvancedMarker>
-      ))}
-    </>
-  );
-};
