@@ -13,6 +13,7 @@ import { Details } from "../screens/details"
 import { Meeting } from "../screens/meeting"
 import { Home } from "../screens/home"
 import { RaiseFund } from "../screens/funding"
+import { RaiseFundPost } from "../screens/raisefund"
 
 export const AppRoutes=()=>{
 
@@ -32,6 +33,7 @@ export const AppRoutes=()=>{
         <Route path="/details" element={<Details/>}/>
         <Route path="/meeting" element={<Meeting/>}/>
         <Route path="/raise-fund" element={<RaiseFund/>}/>
+        <Route path="/create-post" element={<RaiseFundPost/>}/>
       </Routes>
     </div>
 }

@@ -14,6 +14,7 @@ model users{
   googleId String? @unique
   password String?
   verified Boolean @default(false)
+  UserDonationposts FundingPost[]  @relation("donation")
 }
 
 model otpmodel{
@@ -34,4 +35,16 @@ model placeInfo{
  Longitude Float?
  Address String?
  Verified Boolean @default(false)
+}
+
+
+model FundingPost{
+  id String @id @unique @default(uuid())
+  name String?
+  Description String?
+  Raised String?
+  Goal String?
+  img String?
+  Documents String?
+  DonorList users[]  @relation("donation")
 }
