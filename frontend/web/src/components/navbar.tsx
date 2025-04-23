@@ -27,16 +27,17 @@ export const Navbar=()=>{
     //  console.log(resp);
     // }
 
-    return  <nav className="fixed w-full bg-white z-50 px-6 py-4 shadow-sm">
+    return  <nav className="fixed w-full font-poppins bg-white z-50 px-10 py-4 shadow-sm">
     <div className="flex items-center justify-between">
       <div onClick={()=>navigate("/")} className="flex cursor-pointer items-center gap-2">
         <Heart className="w-8 h-8 text-emerald-600" />
-        <span className="text-sm font-bold text-gray-500">FOOD REDISTRIBUTION</span>
+        <span className="text-2xl font-bold text-gray-500">NourishNet</span>
       </div>
       
-      <div className="flex items-center gap-8">
+      <div className="flex items-center gap-10">
         <div className="flex items-center gap-6">
           <a onClick={()=>navigate("/")} className=" cursor-pointer font-medium">Home</a>
+          <a onClick={()=>navigate("/raise-fund")} className=" cursor-pointer font-medium">Raise Fund</a>
           <a onClick={()=>navigate("/dashboard")} className="font-medium cursor-pointer">Dashboard</a>
           <a onClick={()=>navigate("/about")} className="font-medium cursor-pointer">About</a>
         </div>

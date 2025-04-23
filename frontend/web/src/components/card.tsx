@@ -29,9 +29,9 @@ export const Card=({img,name,id,Price,Address,Description,email,phoneNo,Lattitud
                 Details : {Description}
               </div>
 
-              <div className="ml-3 p-1">
+              {/* <div className="ml-3 p-1">
                 Amount: {Price}
-              </div>
+              </div> */}
 
               <div className="h-10 w-full flex items-center justify-center rounded-xl ">
               <button className="h-full w-72 text-white font-semibold cursor-pointer bg-[#7643ED] rounded-xl">View Details</button>

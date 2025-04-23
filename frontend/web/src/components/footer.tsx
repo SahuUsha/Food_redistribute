@@ -35,14 +35,14 @@ export const Footer=()=>{
 
             {/* London office */}
             <div>
-              <h4 className="text-lg font-semibold mb-4">LONDON</h4>
-              <a href="mailto:london@agency.com" className="text-gray-400 hover:text-white block mb-2">
-                london@agency.com
+              <h4 className="text-lg font-semibold mb-4">INDIA</h4>
+              <a href="mailto:vedantkhasbage2005@gmail.com" className="text-gray-400 hover:text-white block mb-2">
+                vedantkhasbage2005@gmail.com
               </a>
-              <p className="text-gray-400 mb-4">+44 20 7998 7571</p>
+              <p className="text-gray-400 mb-4">7709535901</p>
               <p className="text-gray-400 mb-4">
-                Unit 306, Metropolitan Wharf,<br />
-                70 Wapping Wall, London E1W 3SS
+               JhariPatka,<br />
+                Nagpur
               </p>
               <button className="flex items-center space-x-2 text-gray-400 hover:text-white">
                 <span>SEE ON MAP</span>
@@ -52,14 +52,14 @@ export const Footer=()=>{
 
             {/* Buenos Aires office */}
             <div>
-              <h4 className="text-lg font-semibold mb-4">BUENOS AIRES</h4>
-              <a href="mailto:buenosaires@agency.com" className="text-gray-400 hover:text-white block mb-2">
-                buenosaires@agency.com
+              <h4 className="text-lg font-semibold mb-4">NAGPUR</h4>
+              <a href="mailto:vedantkhasbage2005@gmail.com" className="text-gray-400 hover:text-white block mb-2">
+              vedantkhasbage2005@gmail.com
               </a>
-              <p className="text-gray-400 mb-4">+54 11 6799 7949</p>
+              <p className="text-gray-400 mb-4">7709535901</p>
               <p className="text-gray-400 mb-4">
-                Cabildo 1458 1st floor,<br />
-                Buenos Aires
+              1st Floor, Dr. RajKumar Rughwani Building Mohan Lal, Maharashtra 440014<br />
+              Mohanlal Rughwani Marg, <br/> Jaripatka, Nagpur
               </p>
               <button className="flex items-center space-x-2 text-gray-400 hover:text-white">
                 <span>SEE ON MAP</span>
@@ -69,19 +69,10 @@ export const Footer=()=>{
 
             {/* Newsletter and social */}
             <div>
-              <div className="mb-8">
-                <h4 className="text-sm mb-2">WANT TO BE THE SMARTEST IN YOUR OFFICE?</h4>
-                <button className="flex items-center space-x-2 text-white hover:text-gray-200">
-                  <span>SIGN UP FOR OUR NEWSLETTER</span>
-                  <ArrowUpRight className="h-4 w-4" />
-                </button>
-              </div>
               
               <div>
                 <h4 className="text-sm mb-4">FOLLOW US</h4>
                 <div className="flex space-x-6">
-                  <BehanceLogo className="h-6 w-6 hover:text-gray-300 cursor-pointer" />
-                  <Dribbble className="h-6 w-6 hover:text-gray-300 cursor-pointer" />
                   <Instagram className="h-6 w-6 hover:text-gray-300 cursor-pointer" />
                   <Linkedin className="h-6 w-6 hover:text-gray-300 cursor-pointer" />
                 </div>

@@ -7,10 +7,10 @@ import { Footer } from '../components/footer';
 import { useNavigate } from 'react-router-dom';
 
 const demoItems = [
-    { link: '#', text: 'Mojave', image: 'https://picsum.photos/600/400?random=1' },
-    { link: '#', text: 'Sonoma', image: 'https://picsum.photos/600/400?random=2' },
-    { link: '#', text: 'Monterey', image: 'https://picsum.photos/600/400?random=3' },
-    { link: '#', text: 'Sequoia', image: 'https://picsum.photos/600/400?random=4' }
+    { link: '#', text: 'Trust', image: 'https://picsum.photos/600/400?random=1' },
+    { link: '#', text: 'Community', image: 'https://picsum.photos/600/400?random=2' },
+    { link: '#', text: 'Quality', image: 'https://picsum.photos/600/400?random=3' },
+    { link: '#', text: 'Distribution', image: 'https://picsum.photos/600/400?random=4' }
   ];
 export const Home=()=> {
     const navigate=useNavigate();

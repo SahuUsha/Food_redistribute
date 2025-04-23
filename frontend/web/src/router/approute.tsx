@@ -12,6 +12,7 @@ import { Location } from "../screens/location"
 import { Details } from "../screens/details"
 import { Meeting } from "../screens/meeting"
 import { Home } from "../screens/home"
+import { RaiseFund } from "../screens/funding"
 
 export const AppRoutes=()=>{
 
@@ -30,6 +31,7 @@ export const AppRoutes=()=>{
         <Route path="/otp" element={<OTP/>}/>
         <Route path="/details" element={<Details/>}/>
         <Route path="/meeting" element={<Meeting/>}/>
+        <Route path="/raise-fund" element={<RaiseFund/>}/>
       </Routes>
     </div>
 }

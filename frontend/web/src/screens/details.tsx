@@ -66,11 +66,11 @@ export const Details=()=>{
                       <img className="h-6 cover" src="https://icons.veryicon.com/png/o/miscellaneous/commonly-used-icon-1/location-113.png" alt="" />
                       <h1 className="p-1">{data.Address}</h1>
                       </div>
-
-                       <div className="h-10 border-gray-300 mt-2 rounded-xl border-1 w-full flex items-center p-2">
+{/* 
+                       {/* <div className="h-10 border-gray-300 mt-2 rounded-xl border-1 w-full flex items-center p-2">
                         <img className="h-6 w-6 cover" src="https://www.svgrepo.com/show/352417/rupee-sign.svg" alt="" />
-                        <h1 className="p-1">{data.Price} </h1>
-                       </div>
+                        {/* <h1 className="p-1">{data.Price} </h1> */}
+                       {/* </div> */}
 
                        <div className="h-10 border-gray-300 mt-2 rounded-xl border-1 w-full flex items-center p-2">
                            <img className="h-6 w-6 cover" src="https://www.svgrepo.com/show/309853/phone.svg" alt="" />
