@@ -1,9 +1,11 @@
+import { Footer } from "../components/footer"
+import { FundingCard } from "../components/fundcard"
 import { HeroSec } from "../components/Fundherosection"
 import { Navbar } from "../components/navbar"
 
 export const RaiseFund = () => {
 
-    return <div className="h-screen w-full">
+    return <div className="h-screen w-full overflow-x-hidden">
         <Navbar />
         <HeroSec />
 
@@ -36,10 +38,29 @@ export const RaiseFund = () => {
             </div>
         </div>
 
-          <div className="h-screen w-full bg-red-400">
+          <div className="h-screen w-full">
                   <div className="w-full text-center mt-8">
                     <h1 className="text-4xl font-semibold">Explore our Projects</h1>
                   </div>
+
+                  <div className="w-full flex gap-10 flex-wrap p-10 items-center ml-24">
+                     <FundingCard/>
+                     <FundingCard/>
+                     <FundingCard/>
+                     <FundingCard/>
+                     <FundingCard/>
+                     <FundingCard/>
+                     <FundingCard/>
+                  </div>
+
+                  <Footer/>
           </div>
+
+{/* 
+           <div className="mt-96">
+
+            <Footer/>
+           </div> */}
+          
     </div>
 }
