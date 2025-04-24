@@ -1,7 +1,14 @@
-export const UploadField=()=>{
+interface datatype{
+    title:string
+}
+
+export const UploadField=({title}:datatype)=>{
 
     return  <div className="w-1/2">
-    <h1>Upload Thumnail/CoverImage</h1>
-    <input className="h-12 rounded p-1 w-1/3 cursor-pointer border-1 border-gray-400 bg-skin-200 px-2" required type="file"/>
+    <h1>{title}</h1>
+    <label htmlFor='uploadimg' className="block rounded-xl border-1 cursor-pointer h-10 w-1/3 flex items-center justify-center text-sm font-medium text-gray-900">
+              Choose file
+              </label>
+              <input className="hidden" id='uploadimg' type="file" />
 </div>
 }

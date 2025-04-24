@@ -1,9 +1,12 @@
 import { Calendar } from "lucide-react"
 import { User } from "../svg/user"
+import { useNavigate } from "react-router-dom"
 
 export const FundingCard=()=>{
 
-    return <div className="h-[500px] w-1/4 rounded-xl shadow-xl">
+  const navigate=useNavigate();
+
+    return <div onClick={()=>navigate("/detail-post")} className="h-[500px] cursor-pointer w-1/4 rounded-xl shadow-xl">
               <div className="h-[200px] w-full">
                 <img className="cover rounded-xl h-full w-full" src="https://static.vecteezy.com/system/resources/thumbnails/039/030/117/small/ai-generated-sick-male-patient-sleeps-on-the-bed-in-the-hospital-a-man-in-a-hospital-bed-appearing-to-be-asleep-with-an-iv-drip-stand-next-to-the-bed-photo.jpg" alt="" />
               </div>

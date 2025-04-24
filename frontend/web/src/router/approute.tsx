@@ -15,6 +15,7 @@ import { Home } from "../screens/home"
 import { RaiseFund } from "../screens/funding"
 import { RaiseFundPost } from "../screens/raisefund"
 import { RaiseFund2 } from "../screens/raisefundproceed"
+import { DetailPost } from "../screens/detailPost"
 
 export const AppRoutes=()=>{
 
@@ -36,6 +37,7 @@ export const AppRoutes=()=>{
         <Route path="/raise-fund" element={<RaiseFund/>}/>
         <Route path="/create-post" element={<RaiseFundPost/>}/>
         <Route path="/upload-documents" element={<RaiseFund2/>}/>
+        <Route path="/detail-post" element={<DetailPost/>}/>
       </Routes>
     </div>
 }
