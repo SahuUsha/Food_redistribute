@@ -11,6 +11,7 @@ const CLIENT_ID=process.env.CLIENT_ID
 const CLIENT_SECRETE=process.env.CLIENT_SECRETE;
 const sendemail=require("../otplogic/otp");
 import otpgenerator from 'otp-generator';
+import axios from 'axios';
 
 userRouter.post("/signup",async(req,res)=>{
         console.log("reached!!")

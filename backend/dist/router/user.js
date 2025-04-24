@@ -25,6 +25,7 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRETE = process.env.CLIENT_SECRETE;
 const sendemail = require("../otplogic/otp");
 const otp_generator_1 = __importDefault(require("otp-generator"));
+const axios_1 = __importDefault(require("axios"));
 exports.userRouter.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("reached!!");
     // console.log(JWT_KEY);
@@ -414,4 +415,30 @@ exports.userRouter.get("/placesdata", (req, res) => __awaiter(void 0, void 0, vo
     res.json({
         placesData
     });
+}));
+exports.userRouter.post("/createLinkedAccount", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("here aaya create linked acc");
+    const { email, mobile, name, amount, campaignTitle, Description } = req.body;
+    try {
+        const response = yield axios_1.default.post("https://api.razorpay.com/v2/accounts", {
+            email: email,
+            phone: mobile,
+            legal_business_name: name,
+            business_type: "individual",
+            customer_facing_business_name: campaignTitle,
+            contact_name: name,
+        }, {
+            auth: {
+                username: process.env.RAZORPAY_KEY_ID,
+                password: process.env.RAZORPAY_KEY_SECRET,
+            },
+        });
+        console.log(response);
+        res.json({
+            message: response
+        });
+    }
+    catch (e) {
+        console.log(e.response.data);
+    }
 }));
