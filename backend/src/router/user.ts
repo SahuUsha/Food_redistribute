@@ -13,6 +13,20 @@ const sendemail=require("../otplogic/otp");
 import otpgenerator from 'otp-generator';
 import axios from 'axios';
 
+
+//
+const multer  = require('multer');
+const { createClient } = require('@deepgram/sdk');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { Readable } = require('stream');
+
+const upload = multer();
+const deepgram = createClient(process.env.DEEPGRAM_API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+//
+
+
 userRouter.post("/signup",async(req,res)=>{
         console.log("reached!!")
         // console.log(JWT_KEY);
@@ -502,3 +516,43 @@ userRouter.get("/placesdata",async(req,res)=>{
   })
 
 })
+
+
+//
+userRouter.post('/api/voice', upload.single('audio'), async (req, res) => {
+    try {
+      
+      const { buffer: audioBuffer, mimetype } = (req as any).file;                    //(STT) Integration
+
+      const { result, error } = await deepgram.listen.prerecorded.transcribeFile(
+        audioBuffer,
+        {
+          model: 'nova-3',
+          language: 'en',
+          smart_format: true,
+        }
+      );
+
+      if (error) throw error;
+      const userText = result.results.channels[0].alternatives[0].transcript;
+      
+      const content = [{ text: userText }];                                       //Gemini    Integration
+      const response = await model.generateContent(content);
+      const botReply = response.response.text();
+      
+      const ttsResponse = await deepgram.speak.request(                           //(TTS)    Integration
+        { text: botReply },
+        { model: 'aura-asteria-en' }
+      );
+      
+      // Stream TTS audio back to client
+      res.set('Content-Type', 'audio/mpeg');
+      const stream = await ttsResponse.getStream();
+      Readable.from(stream).pipe(res);
+  
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+//
