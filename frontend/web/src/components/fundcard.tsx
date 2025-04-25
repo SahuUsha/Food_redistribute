@@ -20,10 +20,12 @@ interface FundingCardProps {
 
 export const FundingCard = ({ data }: FundingCardProps) => {
 
-  console.log("yein aaya data", data)
+  console.log("yein aaya data this one", data)
   const navigate = useNavigate();
 
-  return <div onClick={() => navigate("/detail-post")} className="h-[500px] cursor-pointer w-1/4 rounded-xl shadow-xl">
+  return <div onClick={() => navigate("/detail-post",{
+    state:{postdata:data}
+  })} className="h-[500px] cursor-pointer w-1/4 rounded-xl shadow-xl">
     <div className="h-[200px] w-full">
       <img className="cover rounded-xl h-full w-full" src={data.img} alt="" />
     </div>
@@ -37,7 +39,7 @@ export const FundingCard = ({ data }: FundingCardProps) => {
 
       <div className="flex justify-between">
         <h1 className="ml-2">Raised: Rs.{data.Raised}</h1>
-        <h1 className="mr-8">10%</h1>
+        <h1 className="mr-8">{Number((Number(data.Raised)/Number(data.Goal))*100)}%</h1>
       </div>
       <div className=" flex justify-between">
         <h1 className="ml-2">Goal: Rs.{data.Goal}</h1>

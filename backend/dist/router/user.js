@@ -497,3 +497,19 @@ exports.userRouter.get("/allpost", (req, res) => __awaiter(void 0, void 0, void 
         data: resp
     });
 }));
+exports.userRouter.post("/verifyPayment", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("payemnt verify");
+    const { PostId, userId, Amount, ScreenShot } = req.body;
+    const resp = yield pclient.fundingPost.update({
+        where: {
+            id: PostId
+        },
+        data: {
+            Raised: Amount
+        }
+    });
+    console.log(resp);
+    res.json({
+        message: resp
+    });
+}));

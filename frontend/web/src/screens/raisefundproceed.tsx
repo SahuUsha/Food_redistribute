@@ -70,11 +70,16 @@ export const RaiseFund2=()=>{
 
     const handleupload=async()=>{
 
+    console.log("inside fn")
+        console.log(UPIidRef.current?.value)
+        console.log(QRref.current?.value)
+        console.log(ThumnailRef.current?.value)
+        console.log(DocumentRef.current?.value)
 
-        if(UPIidRef.current?.value==="" && QRref.current?.value===""){
-            alert("Enter All necessary Details2");
+        if(UPIidRef.current?.value==="" || QRCode==="" || thumbnail==="" || Document===""){
+            alert("Enter All necessary Details");
             return;
-        }
+        }else{
        console.log("inside fn");
           
   const resp=await axios.post("http://localhost:3000/user/uploadDoc",{
@@ -91,7 +96,7 @@ export const RaiseFund2=()=>{
     if(resp.data){
         alert("Post created!!");
         navigate("/raise-fund");
-    }
+    }}
     }
 
 
@@ -123,7 +128,6 @@ export const RaiseFund2=()=>{
                     <div className="w-full flex items-center justify-center">
                    <UploadField handlefn={handleQRUpload} inputref={QRref} title="Upload QR Code"/>
                     </div>
-                   <h1>Or continue with UPI ID</h1>
                   
                     <FormField inputref={UPIidRef} type="text" title="Enter UPI ID" placeholder="Enter Valid UPI Id e.g (user@axisbank)"/>
                 
