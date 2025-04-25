@@ -34,9 +34,10 @@ export const RaiseFundPost=()=>{
         },{withCredentials:true})
 
         console.log(resp);
+
         if(resp.data){
             navigate("/upload-documents",{
-                state:resp
+                state:{id:resp.data.message.id}
             });
         }
 

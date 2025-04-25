@@ -582,8 +582,44 @@ userRouter.post("/createPost",async(req,res)=>{
 
 userRouter.post("/uploadDoc",async(req,res)=>{
 
+    console.log("here l");
    
-    const {Id,thumnailUrl,QRCodeUrl,ValidProofUrl,UPIid}=req.body;
-    
+    const {PostId,thumnailUrl,QRCodeUrl,ValidProofUrl,UPIid}=req.body;
+        
+    console.log(PostId);
+    console.log(thumnailUrl);
+    console.log(QRCodeUrl);
 
+    console.log(UPIid);
+
+
+
+    const resp=await pclient.fundingPost.update({
+      where:{
+        id:PostId.id
+      },
+      data:{
+       UPIid:UPIid,
+       Documents:ValidProofUrl,
+       img:thumnailUrl,
+       QRCode:QRCodeUrl
+      }
+    })
+
+
+    console.log(resp);
+
+    res.json({
+        message:resp
+    })
+
+})
+
+userRouter.get("/allpost",async(req,res)=>{
+    
+   const resp=await pclient.fundingPost.findMany({});
+
+  res.json({
+  data:resp
+ })
 })
