@@ -556,3 +556,34 @@ userRouter.post('/api/voice', upload.single('audio'), async (req, res) => {
     }
   });
 //
+
+
+userRouter.post("/createPost",async(req,res)=>{
+     
+    const {name,title,Description,Amount,Mobile}=req.body;
+
+     
+   const resp=await pclient.fundingPost.create({
+        data:{
+        name:title,
+        Description:Description,
+        Goal:Amount,
+        Raised:"0",
+        }
+    })
+
+    console.log(resp)
+    res.json({
+        message:resp
+    })
+
+})
+
+
+userRouter.post("/uploadDoc",async(req,res)=>{
+
+   
+    const {Id,thumnailUrl,QRCodeUrl,ValidProofUrl,UPIid}=req.body;
+    
+
+})

@@ -453,3 +453,18 @@ exports.userRouter.post('/api/voice', upload.single('audio'), (req, res) => __aw
     }
 }));
 //
+exports.userRouter.post("/createPost", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, title, Description, Amount, Mobile } = req.body;
+    const resp = yield pclient.fundingPost.create({
+        data: {
+            name: title,
+            Description: Description,
+            Goal: Amount,
+            Raised: "0",
+        }
+    });
+    console.log(resp);
+    res.json({
+        message: resp
+    });
+}));
