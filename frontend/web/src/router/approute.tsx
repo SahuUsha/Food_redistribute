@@ -17,6 +17,10 @@ import { RaiseFundPost } from "../screens/raisefund"
 import { RaiseFund2 } from "../screens/raisefundproceed"
 import { DetailPost } from "../screens/detailPost"
 
+//
+import VoiceChat from "../components/voiceBot"
+//
+
 export const AppRoutes=()=>{
 
     return <div>
@@ -38,6 +42,9 @@ export const AppRoutes=()=>{
         <Route path="/create-post" element={<RaiseFundPost/>}/>
         <Route path="/upload-documents" element={<RaiseFund2/>}/>
         <Route path="/detail-post" element={<DetailPost/>}/>
+
+        <Route path="/voice-bot" element={<VoiceChat/>}/>
+        
       </Routes>
     </div>
 }
